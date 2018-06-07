@@ -3,19 +3,33 @@ resources:
     type: integration
     integration: drship_jf_docker # Replace with the name you created in the earlier step
 
+  - name: mySecretParams
+    type: params
+    versionTemplate:
+      params:
+        MY_USERNAME: "foo"                    
+        MY_PASSWORD: "bar"                 
+        secure: CYCV/K6ixH7WwG06VG8NZm6FSOhdrbcut02F9rOZxIuWLmrWv68NMuwuko7bLgMBI+4smGEKx1J/GD3FJ7YMC2ilPXbfufxLUC4V0s2+qksJFwDUyc+xnGgxssw7js1yMbD4iZvsby8cjTrg2WVmtZTfDBcZrJlIk/eKeDuzORa2jVRp9bpo0uSSPkSqSbzGCaYu/yTaeP0GVYitp62otrU4IW6Duyx6XfeuPshhVnBLAvR4dlO30yoaqqFMniOwfRvsXq6PvyUxxFoCMS3eGolRT3PO2Ykf83Sj5iyr3h9XaGGxJKUQpEOPDiFAn9dGnEEYZ5vM7jZlFUASSBd+Tg==  
+
 jobs:
-  - name: prod_deploy
+  - name: test_secrets
     type: runSh
     steps:
       - IN: mySecret   # Specify the resource as an IN
+      - IN: mySecretParams
       - TASK:
-          name: first_task   
+          name: test_integration    
           script:
-            - MY_USERNAME=$(shipctl get_integration_resource_field "mySecret" "username") # Retrieve username
+            - DH_USR_NAME=$(shipctl get_integration_resource_field "mySecret" "username") # Retrieve username
             - echo $MY_USERNAME    
-            - MY_PASSWORD=$(shipctl get_integration_resource_field "mySecret" "password") # Retrieve username
+            - DH_USR_NAME=$(shipctl get_integration_resource_field "mySecret" "password") # Retrieve username
             - echo $MY_PASSWORD             
-
+      - TASK:
+          name: test_params   
+          script:
+            - echo $MY_USERNAME
+            - echo $MY_PASSWORD
+            - echo $TEST # The encrypted string was TEST=FOO
 
 
          
