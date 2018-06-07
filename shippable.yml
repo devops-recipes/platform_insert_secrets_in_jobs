@@ -11,8 +11,8 @@ jobs:
       - TASK:
           name: first_task   
           script:
-            - MY_USERNAME=$(shipctl get_integration_resource_field "mySecret" "username") # Retrieve username
-            - MY_PASSWORD=$(shipctl get_integration_resource_field "mySecret" "password") # Retrieve password
+            - MY_USERNAME=$"(shipctl get_integration_resource_field mySecret username)" # Retrieve username
+            - MY_PASSWORD=$"(shipctl get_integration_resource_field mySecret password)" # Retrieve password
             - echo $MY_USERNAME
             - echo $MY_PASSWORD
             
