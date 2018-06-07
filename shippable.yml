@@ -12,7 +12,9 @@ jobs:
           name: first_task   
           script:
             - MY_USERNAME=$(shipctl get_integration_resource_field "mySecret" "username") # Retrieve username
-            - echo $MY_USERNAME          
+            - echo $MY_USERNAME    
+            - MY_URL=$(shipctl get_integration_resource_field "mySecret" "url") # Retrieve username
+            - echo $MY_URL             
 
 
 
