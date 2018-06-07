@@ -1,7 +1,7 @@
 resources:
   - name: mySecret
     type: integration
-    integration: myKeyValue # Replace with the name you created in the earlier step
+    integration: drship_jf_docker # Replace with the name you created in the earlier step
 
 jobs:
   - name: prod_deploy
@@ -12,7 +12,8 @@ jobs:
           name: first_task   
           script:
             - MY_USERNAME=$(shipctl get_integration_resource_field "mySecret" "username") # Retrieve username
-            - echo $MY_USERNAME
+            - echo $MY_USERNAME          
+
 
 
          
