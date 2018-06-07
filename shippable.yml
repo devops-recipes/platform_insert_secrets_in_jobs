@@ -21,9 +21,7 @@ jobs:
           name: test_integration    
           script:
             - DH_USR_NAME=$(shipctl get_integration_resource_field "mySecret" "username") # Retrieve username
-            - echo $DH_USR_NAME    
-            - DH_PASS=$(shipctl get_integration_resource_field "mySecret" "password") # Retrieve username
-            - echo $DH_PASS             
+            - echo $DH_USR_NAME              
       - TASK:
           name: test_params   
           script:
