@@ -15,6 +15,10 @@ jobs:
             - MY_PASSWORD="$(shipctl get_integration_resource_field mySecret password)" # Retrieve password
             - echo $MY_USERNAME
             - echo $MY_PASSWORD
+            - MY_USERNAME=$"(shipctl get_integration_resource_field "myKeyValue" "username")" # Retrieve username
+            - MY_PASSWORD=$"(shipctl get_integration_resource_field "myKeyValue" "password")" # Retrieve password
+            - echo $MY_USERNAME
+            - echo $MY_PASSWORD
             - echo $username
             - echo $password
          
