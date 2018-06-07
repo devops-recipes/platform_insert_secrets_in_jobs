@@ -1,0 +1,18 @@
+resources:
+  - name: mySecret
+    type: integration
+    integration: myKeyValue # Replace with the name you created in the earlier step
+
+jobs:
+  - name: prod_deploy
+    type: runSh
+    steps:
+      - IN: mySecret   # Specify the resource as an IN
+      - TASK:
+          name: first_task   
+          script:
+            - MY_USERNAME="$(shipctl get_resource_version_key "mySecret" "username")" # Retrieve username
+            - MY_PASSWORD="$(shipctl get_resource_version_key "mySecret" "password")" # Retrieve password
+            - echo $MY_USERNAME
+            - echo $MY_PASSWORD
+            
